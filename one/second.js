@@ -34,8 +34,6 @@ let res = fs.readFileSync('./data.txt', 'utf-8').split('\n').map(line => {
   let first = digitValue(matchArr[0]);
   let second = digitValue(matchArr[matchArr.length - 1]);
 
-  console.log(matchArr);
-
   return Number.parseInt(first + second);
 }).reduce((pre, cur) => pre + cur);
 
