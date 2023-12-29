@@ -7,19 +7,25 @@ function getNumber(numList, index) {
     }
   }
 
-  return [0];
+  return [-1];
 }
 
-function numNotEqual(num, number) {
+function numEqual(num, number) {
   if (num[0] == 0) {
     return;
   }
 
-  if (num[1] == number[1] && num[2] == number[2]) {
-    return false;
+  return num[1] === number[1] && num[2] === number[2];
+}
+
+function contains(list, item) {
+  for (const i of list) {
+    if (numEqual(i, item)) {
+      return true;
+    }
   }
 
-  return true;
+  return false;
 }
 
 const numRegex = /[0-9]+/gi
@@ -42,21 +48,29 @@ let res = 0;
 
 for (const sym of symList) {
   const index = sym
+  const newList = [];
 
   let directions = [-lineLength, 0, lineLength];
 
   for (const direction of directions) {
     for (let i = -1; i < 2; i++) {
       const num = getNumber(numList, index + direction + i);
-      console.log(num);
 
-      res += num[0];
+      if (num[0] === -1) continue;
+      if (contains(newList, num)) continue;
 
-      console.log(num, res, index + direction + i);
+      newList.push(num);
 
-      numList = numList.filter(n => numNotEqual(n, num));
+
     }
   }
+
+  if (newList.length !== 2) continue;
+
+  console.log(newList);
+  console.log(res);
+
+  res += newList[0][0] * newList[1][0];
 }
 
 console.log(res);
