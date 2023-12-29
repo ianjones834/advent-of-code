@@ -29,7 +29,7 @@ function contains(list, item) {
 }
 
 const numRegex = /[0-9]+/gi
-const symRegex = /[^.^0-9^\n]/gi
+const symRegex = /[*]/gi
 
 const schematic = fs.readFileSync('./data.txt', 'utf-8');
 
